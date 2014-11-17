@@ -153,11 +153,12 @@
             android:layout_height="1dp"
             android:background="#cccccc" />
 
-       <ListView 
-           
-           >
-           
-       </ListView>
+       <ListView android:id="@+id/list"   
+			android:layout_width="match_parent"   
+			android:layout_height="match_parent"   
+			android:background="#5B5B5B"   
+			android:layout_weight="1"   
+			android:drawSelectorOnTop="false"/>
     </LinearLayout>
 
 </RelativeLayout>

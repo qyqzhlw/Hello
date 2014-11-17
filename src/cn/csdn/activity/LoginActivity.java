@@ -20,7 +20,8 @@ import cn.csdn.util.HttpUtil;
 
 public class LoginActivity extends Activity {
 	private static final int COMM_ENRTY_REQUEST_CODE = 1;
-
+	
+	
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

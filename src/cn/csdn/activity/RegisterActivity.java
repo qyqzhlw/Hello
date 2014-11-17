@@ -6,26 +6,43 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
-import cn.csdn.util.DialogUtil;
-import cn.csdn.util.HttpUtil;
-
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
+import cn.csdn.util.DialogUtil;
+import cn.csdn.util.HttpUtil;
 
 public class RegisterActivity extends Activity {
 	Builder builder;
+	EditText username_input;
+	EditText  password_input;
+	EditText  mobile_input;
+	RadioGroup rg;
+	String tip;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.register);
+		username_input=(EditText)findViewById(R.id.usernameRegister); 
+		password_input=(EditText)findViewById(R.id.passwordRegister);
+		mobile_input=(EditText)findViewById(R.id.mobile);
+		rg = (RadioGroup)findViewById(R.id.sex);
+		rg.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(RadioGroup grouo, int checkedId) {
+				// TODO Auto-generated method stub
+				 tip = checkedId == R.id.nan ? "您的性别是男人" : "您到性别是女人";
+				
+			}
+		});
 	    Button button = (Button)findViewById(R.id.Register);
 	    button.setOnClickListener(new OnClickListener() {
 			@Override
@@ -38,12 +55,6 @@ public class RegisterActivity extends Activity {
 	
 	
 	public void onRegister(){
-	EditText  username_input=(EditText)findViewById(R.id.username); 
-	EditText  password_input=(EditText)findViewById(R.id.password);
-	EditText  mobile_input=(EditText)findViewById(R.id.mobile);
-	String username=username_input.getText().toString();
-	String password=password_input.getText().toString();
-	String mobile=mobile_input.getText().toString();
 	if (validate()){
       if (register()) {
     	  DialogUtil.showDialog(this,"用户注册成功",false);  
@@ -59,10 +70,10 @@ public class RegisterActivity extends Activity {
 
 	  private boolean register(){
 		    JSONObject jsonObj;
-		    String username=((EditText)findViewById(R.id.username)).getText().toString();
-		    String password=((EditText)findViewById(R.id.password)).getText().toString();
-		    String mobile=((EditText)findViewById(R.id.mobile)).getText().toString();
-		    String sex=((EditText)findViewById(R.id.sex)).getText().toString();
+		    String username=username_input.getText().toString();
+		    String password=password_input.getText().toString();
+		    String mobile=mobile_input.getText().toString();
+		    String sex= tip;
 		    
 		    try
 		    {
@@ -96,9 +107,6 @@ public class RegisterActivity extends Activity {
 		}
 	
 	  private boolean validate(){
-			EditText  username_input=(EditText)findViewById(R.id.username); 
-			EditText  password_input=(EditText)findViewById(R.id.password);
-			EditText  mobile_input=(EditText)findViewById(R.id.mobile);
 			String username=username_input.getText().toString();
 			String password=password_input.getText().toString();
 			String mobile=mobile_input.getText().toString();
